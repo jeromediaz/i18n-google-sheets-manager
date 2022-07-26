@@ -11,13 +11,13 @@
     "start:windows": "nodemon --watch 'src/**/*.ts' --exec \"npx ts-node\" src/index.ts",
     "create": "yarn run build && yarn run test",
     "build": "tsc -p .",
-    "local": "sudo npm i -g && pizza",
+    "local": "sudo npm i -g && i18n-gs",
     "refresh": "rm -rf ./node_modules ./yarn.lock && yarn",
     "test": ""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://jerome_diaz@bitbucket.org/jerome_diaz/i18n-google-sheets-manager.git"
+    "url": "git+https://github.com/Eurelis/i18n-google-sheets-manager.git"
   },
   "keywords": [
     "i18n",
@@ -26,9 +26,9 @@
   "author": "Jérôme DIAZ",
   "license": "ISC",
   "bugs": {
-    "url": "https://bitbucket.org/jerome_diaz/i18n-google-sheets-manager/issues"
+    "url": "https://github.com/Eurelis/i18n-google-sheets-manager/issues"
   },
-  "homepage": "https://bitbucket.org/jerome_diaz/i18n-google-sheets-manager#readme",
+  "homepage": "https://github.com/Eurelis/i18n-google-sheets-manager",
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.3.0",

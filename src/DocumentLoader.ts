@@ -1,8 +1,10 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { Configuration } from './Configuration';
+import { Configuration, Credentials } from './Configuration';
 import buildExporter from './exporter/Exporter';
 import JSONExporter from './exporter/JSONExporter';
 import SheetProcessor, { I18nMap } from './SheetProcessor';
+import fs from 'fs';
+import path from 'path';
 
 export default class DocumentLoader {
   doc: GoogleSpreadsheet;
@@ -14,7 +16,15 @@ export default class DocumentLoader {
     this.doc = new GoogleSpreadsheet(conf.docID);
     this.conf = conf;
 
-    const { client_email, private_key } = conf.credentials;
+    let credentials = conf.credentials;
+
+    if (typeof credentials === 'string') {
+      const credentialsFile = fs.readFileSync(path.resolve(credentials));
+
+      credentials = JSON.parse(credentialsFile.toString());
+    }
+
+    const { client_email, private_key } = credentials as Credentials;
 
     this.docLoading = this.doc
       .useServiceAccountAuth({ client_email, private_key })
