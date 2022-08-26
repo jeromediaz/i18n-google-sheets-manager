@@ -1,4 +1,4 @@
-interface Credentials {
+export interface Credentials {
     client_email: string;
     private_key: string;
 }
@@ -10,9 +10,8 @@ export interface Output {
     keyPathSeparator?: string | false;
 }
 export interface Configuration {
-    credentials: Credentials;
+    credentials: Credentials | string;
     docID: string;
     outputs: Output[];
 }
 export declare function loadConfiguration(path: string): Configuration | undefined;
-export {};

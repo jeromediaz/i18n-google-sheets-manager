@@ -7,7 +7,7 @@ import DocumentLoader from './documentLoader';
 
 const program = new Command();
 program
-  .version('0.0.1', '-v, --version', 'Output the current version')
+  .version('1.0.0', '-v, --version', 'Output the current version')
   .description('A CLI to manage localization based on google sheets');
 
 program.addOption(
@@ -20,13 +20,10 @@ program.parse();
 
 const options = program.opts();
 
-const {config} = options;
+const { config } = options;
 
 const configuration = loadConfiguration(path.resolve(config));
 if (configuration) {
-  console.log(configuration);
   const docLoader = new DocumentLoader(configuration);
   docLoader.process();
-
 }
-

@@ -55,18 +55,12 @@ export default class BaseExporter {
       });
   }
 
-  extractValues(values: I18nKey): string {
+  extractValues(_values: I18nKey): string {
     throw new Error('unimplemented method extractValues');
-    const extractedValues = BaseExporter.keyPathExtractor(
-      values,
-      this.output.keyPathSeparator || '.'
-    );
-    return JSON.stringify(extractedValues, null, 2);
   }
 
-  defaultFileName(locale: string): string {
+  defaultFileName(_locale: string): string {
     throw new Error('unimplemented method extractValues');
-    return `${locale}.json`;
   }
 
   processLocale(locale: string, values: I18nKey): Promise<void> {

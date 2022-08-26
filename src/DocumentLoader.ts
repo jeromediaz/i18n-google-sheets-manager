@@ -36,7 +36,6 @@ export default class DocumentLoader {
   process(): Promise<void> {
     return this.docLoading.then(() => {
       const promises = this.conf.outputs.map((output) => {
-        console.log(output);
         if (output.sheetIndex !== undefined) {
           const sheetProcessor = new SheetProcessor(
             this.doc.sheetsByIndex[output.sheetIndex]
@@ -47,6 +46,9 @@ export default class DocumentLoader {
             return exporter.process(i18nLocale);
           });
         }
+      });
+      return Promise.all(promises).then(() => {
+        // nothing to do
       });
     });
   }

@@ -3,31 +3,70 @@
 Export translation files from Google Docs spreadsheets.
 
 
+## Configuration file
+
+The project is configured through a json files whose default name is i18n-gs.json and is loaded from current directory.
+
+To specify a different filename or path use the -c or --config configuration file path.
+
+```
+i18n-gs -c path/to/config-file.json
+```
+
+
+### Configuration file JSON structure
 
 
 Prop | Description | Type | Default
 ------ | ------ | ------ | ------
-**`credentials`** | Array of items to loop on | Array | **Required**
-**`docID`** | Takes an item from data and renders it into the list. The function receives one argument `{item, index}` (see [Usage](https://github.com/meliorence/react-native-snap-carousel#usage)) and must return a React element. | Function | **Required**
-**`outputs`** | Width in pixels of carousel's items, **must be the same for all of them** | Number | **Required for **horizontal** carousel**
+**`credentials`** | Credendials informations | Credential object or path to a credential json file | **Required**
+**`docID`** | Google sheet document id | string | **Required**
+**`outputs`** | Array of outputs objects | Output[] | **Required**
 
 
 
-Prop | Description | Type | Default
------- | ------ | ------ | ------
-**`credentials`** | Array of items to loop on | Array | **Required**
-**`docID`** | Takes an item from data and renders it into the list. The function receives one argument `{item, index}` (see [Usage](https://github.com/meliorence/react-native-snap-carousel#usage)) and must return a React element. | Function | **Required**
-**`outputs`** | Width in pixels of carousel's items, **must be the same for all of them** | Number | **Required for**horizontal**carousel**
-**`sliderWidth`** | Width in pixels of the carousel itself | Number | **Required for**horizontal**carousel**
-**`itemHeight`** | Height in pixels of carousel's items, **must be the same for all of them** | Number | **Required for**vertical**carousel**
-**`sliderHeight`** | Height in pixels of the carousel itself | Number | **Required for**vertical**carousel**
-
+### Credentials object / JSON structure
 
 
 Prop | Description | Type | Default
 ------ | ------ | ------ | ------
-**`sheetIndex`** | Array of items to loop on | Array | **Required**
-**`keyPathSeparator`** | Takes an item from data and renders it into the list. The function receives one argument `{item, index}` (see [Usage](https://github.com/meliorence/react-native-snap-carousel#usage)) and must return a React element. | Function | **Required**
-**`method`** | 'json' or 'yaml' | string | **Required for**horizontal**carousel**
-**`outputDir`** | Width in pixels of the carousel itself | Number | **Required for**horizontal**carousel**
-**`fileName`** | Height in pixels of carousel's items, **must be the same for all of them** | Number | **Required for**vertical**carousel**
+**`client_email`** | Client email | string | **Required**
+**`private_key`** | Private key | string | **Required**
+
+
+
+### Output object structure
+
+
+Prop | Description | Type | Default
+------ | ------ | ------ | ------
+**`sheetIndex`** | index of sheet | number | **Required**
+**`method`** | 'json' or 'yaml' file export | string | **Required**
+**`outputDir`** | path of output directory | string | **Required**
+**`fileName`** | filename / path relative to output dir, can contain a mustache value {{locale}}, ie: '{{locale}}.json' | string | optional
+**`keyPathSeparator`** | Separator used on key, false to disable key extraction | string or false| "."
+
+
+example file
+```
+{
+  "credentials": "credentials.json",
+  "docID": "...",
+  "outputs": [
+    {
+      "sheetIndex": 0,
+      "keyPathSeparator": ".",
+      "method": "json",
+      "outputDir": "./export/",
+      "fileName": "{{locale}}/message_{{locale}}.json"
+    },
+     {
+      "sheetIndex": 0,
+      "keyPathSeparator": ".",
+      "method": "yaml",
+      "outputDir": "./export/",
+      "fileName": "{{locale}}/message_{{locale}}.yml"
+    }
+  ]
+}
+```

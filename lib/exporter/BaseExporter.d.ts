@@ -5,7 +5,7 @@ export default class BaseExporter {
     constructor(output: Output);
     static keyPathExtractor(map: I18nKey, separator: String | false): any;
     process(map: I18nMap): Promise<void>;
-    extractValues(values: I18nKey): string;
-    defaultFileName(locale: string): string;
+    extractValues(_values: I18nKey): string;
+    defaultFileName(_locale: string): string;
     processLocale(locale: string, values: I18nKey): Promise<void>;
 }
